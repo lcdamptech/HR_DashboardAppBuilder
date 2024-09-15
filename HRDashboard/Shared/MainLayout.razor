@@ -1,0 +1,306 @@
+@inherits LayoutComponentBase
+@using DashboardData
+@using Models.DashboardData
+@inject NavigationManager NavigationManager
+@inject IDashboardDataService DashboardDataService
+
+<div class="row-layout master-page-container">
+    <div class="row-layout group">
+        <div class="row-layout group_1">
+            <div class="column-layout left-panel">
+                <div class="column-layout logo-and-nav">
+                    <div class="row-layout logo">
+                        <img src="assets/LogoHR.svg" class="image" />
+                        <p class="typography__subtitle-2 text">
+                            HR
+                        </p>
+                        <p class="typography__subtitle-2 text_1">
+                            CORP
+                        </p>
+                    </div>
+                    <IgbList class="navigation" master_page-scope>
+                        <IgbListItem @onclick="@(e => Navigate("/dashboard"))">
+                            <IgbAvatar slot="start" Shape="AvatarShape.Circle" class="avatar" master_page-scope>
+                                <span class="material-icons icon">
+                                    dashboard
+                                </span>
+                            </IgbAvatar>
+                            <div>
+                                <p class="typography__subtitle-2 text_2">
+                                    DASHBOARD
+                                </p>
+                            </div>
+                        </IgbListItem>
+                        <IgbListItem @onclick="@(e => Navigate("/team"))">
+                            <IgbAvatar slot="start" Shape="AvatarShape.Circle" class="avatar_2" master_page-scope>
+                                <span class="material-icons icon_1">
+                                    people
+                                </span>
+                            </IgbAvatar>
+                            <div>
+                                <p class="typography__subtitle-2 text_3">
+                                    TEAM
+                                </p>
+                            </div>
+                        </IgbListItem>
+                        <IgbListItem @onclick="@(e => Navigate("/events"))">
+                            <IgbAvatar slot="start" Shape="AvatarShape.Circle" class="avatar_3" master_page-scope>
+                                <span class="material-icons icon_1">
+                                    stars
+                                </span>
+                            </IgbAvatar>
+                            <div>
+                                <p class="typography__subtitle-2 text_3">
+                                    EVENTS
+                                </p>
+                            </div>
+                        </IgbListItem>
+                        @if (_listItemVisible)
+                        {
+                            <IgbListItem @onclick="@(e => _settings!.ToggleAsync())">
+                                <IgbAvatar slot="start" Shape="AvatarShape.Circle" class="avatar_4" master_page-scope>
+                                    <span class="material-icons icon_1">
+                                        settings
+                                    </span>
+                                </IgbAvatar>
+                                <div>
+                                    <p class="typography__subtitle-2 text_3">
+                                        SETTINGS
+                                    </p>
+                                </div>
+                            </IgbListItem>
+                        }
+                    </IgbList>
+                </div>
+                <div class="column-layout user">
+                    <IgbAvatar Src="assets/Avatar13.png" Shape="AvatarShape.Circle" class="avatar_1" master_page-scope></IgbAvatar>
+                    <p class="typography__subtitle-2 text_4">
+                        Sandy Anderson
+                    </p>
+                    <p class="typography__caption text_5">
+                        UX DESIGN LEAD
+                    </p>
+                </div>
+                <div class="column-layout background">
+                    <div class="row-layout group_2">
+                        <IgbButton Variant="ButtonVariant.Flat" @onclick="@(e => _settings!.ToggleAsync())" class="button button_2" master_page-scope>
+                            <span class="material-icons icon_2">
+                                settings
+                            </span>
+                            <span>Settings</span>
+                            <IgbRipple></IgbRipple>
+                        </IgbButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="view-container">
+            @Body
+        </div>
+        <div class="column-layout right-panel">
+            <div class="column-layout group_3">
+                <div class="row-layout group_4">
+                    <h6 class="h6">
+                        Calendar
+                    </h6>
+                    <IgbIconButton Variant="IconButtonVariant.Flat" class="icon-button" master_page-scope>
+                        <span class="material-icons icon_3">
+                            notifications
+                        </span>
+                        <IgbRipple></IgbRipple>
+                    </IgbIconButton>
+                </div>
+                <IgbList class="navigation" master_page-scope>
+                    <IgbListHeader>July 1st</IgbListHeader>
+                    <IgbListItem>
+                        <div>
+                            <div class="row-layout logo">
+                                <p class="typography__subtitle-1 text_6">
+                                    10 AM
+                                </p>
+                                <div class="column-layout group_5">
+                                    <p class="typography__overline text_5">
+                                        TRAINING
+                                    </p>
+                                    <p class="typography__subtitle-2 text_7">
+                                        Intro to Scrum
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </IgbListItem>
+                    <IgbListItem>
+                        <div>
+                            <div class="row-layout logo">
+                                <p class="typography__subtitle-1 text_6">
+                                    12 PM
+                                </p>
+                                <div class="column-layout group_6">
+                                    <p class="typography__overline text_5">
+                                        OFFICE HOURS
+                                    </p>
+                                    <p class="typography__subtitle-2 text_7">
+                                        Customers Q&amp;A
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </IgbListItem>
+                    <IgbListHeader>July 5th</IgbListHeader>
+                    <IgbListItem>
+                        <div>
+                            <div class="row-layout logo">
+                                <p class="typography__subtitle-1 text_6">
+                                    10 AM
+                                </p>
+                                <div class="column-layout group_7">
+                                    <p class="typography__overline text_5">
+                                        HR CORP
+                                    </p>
+                                    <p class="typography__subtitle-2 text_7">
+                                        Company Meeting
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </IgbListItem>
+                    <IgbListItem>
+                        <div>
+                            <div class="row-layout logo">
+                                <p class="typography__subtitle-1 text_6">
+                                    12 PM
+                                </p>
+                                <div class="column-layout group_8">
+                                    <p class="typography__overline text_5">
+                                        TRAINING
+                                    </p>
+                                    <p class="typography__subtitle-2 text_7">
+                                        Managing People
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </IgbListItem>
+                </IgbList>
+            </div>
+            <div class="column-layout group_9">
+                <h6 class="h6_1">
+                    New Team Members
+                </h6>
+                <IgbList class="navigation" master_page-scope>
+                    @foreach (var item in _dashboardDataNewTeamMembersList)
+                    {
+                        <IgbListItem>
+                            <div>
+                                <div class="row-layout logo">
+                                    <IgbAvatar Src="@item.Photo" Shape="AvatarShape.Circle" class="avatar_5" master_page-scope></IgbAvatar>
+                                    <div class="column-layout group_10">
+                                        <div class="row-layout group_11">
+                                            <p class="typography__subtitle-2 text_8">
+                                                @item.Name
+                                            </p>
+                                        </div>
+                                        <p class="typography__overline text_5">
+                                            @item.Position
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </IgbListItem>
+                    }
+                </IgbList>
+            </div>
+        </div>
+    </div>
+    <IgbDialog CloseOnOutsideClick="true" @ref="_settings">
+        <h5 slot="title">
+            Settings
+        </h5>
+        <div class="column-layout group_12">
+            <div class="column-layout group_13">
+                <p class="typography__subtitle-2 text_2">
+                    THEME
+                </p>
+                <div class="row-layout group_13">
+                    <IgbCard Outlined="false" class="card" master_page-scope>
+                        <IgbCardMedia class="media-content" master_page-scope>
+                            <img src="assets/theme-light.svg" class="image_1" />
+                        </IgbCardMedia>
+                        <IgbCardHeader>
+                            <h3 slot="title">
+                            </h3>
+                            <h5 slot="subtitle">
+                                Default
+                            </h5>
+                        </IgbCardHeader>
+                    </IgbCard>
+                    <IgbCard class="card" master_page-scope>
+                        <IgbCardMedia class="media-content" master_page-scope>
+                            <img src="assets/theme-dark.svg" class="image_1" />
+                        </IgbCardMedia>
+                        <IgbCardHeader>
+                            <h3 slot="title">
+                            </h3>
+                            <h5 slot="subtitle">
+                                Dark
+                            </h5>
+                        </IgbCardHeader>
+                    </IgbCard>
+                </div>
+            </div>
+            <div class="column-layout group_13">
+                <p class="typography__subtitle-2 text_2">
+                    APPLICATION
+                </p>
+                <div class="column-layout group_14">
+                    <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" class="user-input" master_page-scope>
+                        Auto-start application
+                    </IgbCheckbox>
+                    <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" class="user-input" master_page-scope>
+                        Open application in the background
+                    </IgbCheckbox>
+                    <IgbCheckbox LabelPosition="CheckboxBaseLabelPosition.After" @bind-Checked="@_checked" class="user-input" master_page-scope>
+                        On close, keep the application running
+                    </IgbCheckbox>
+                </div>
+            </div>
+            <div class="column-layout group_13">
+                <p class="typography__subtitle-2 text_2">
+                    NOTIFICATIONS
+                </p>
+                <div class="column-layout group_14">
+                    <IgbSwitch @bind-Checked="@_checked" class="user-input" master_page-scope>
+                        Enable Notifications
+                    </IgbSwitch>
+                    <IgbSwitch class="user-input" master_page-scope>
+                        Play sound for notifications
+                    </IgbSwitch>
+                </div>
+            </div>
+        </div>
+        <div slot="footer">
+            <IgbButton @onclick="@(e => _settings!.ToggleAsync())" class="button_1" master_page-scope>
+                Done
+                <IgbRipple></IgbRipple>
+            </IgbButton>
+        </div>
+    </IgbDialog>
+</div>
+
+@code {
+    private bool _listItemVisible = false;
+    private List<NewTeamMembersListType> _dashboardDataNewTeamMembersList = new();
+    private IgbDialog _settings;
+    private bool _checked = true;
+
+    public void Navigate(string path)
+    {
+        NavigationManager.NavigateTo(path);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _dashboardDataNewTeamMembersList = await DashboardDataService.GetNewTeamMembersListList();
+        await base.OnInitializedAsync();
+    }
+}
